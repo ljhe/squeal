@@ -147,7 +147,7 @@ func (ab *AddressBook) GetByID(ctx context.Context, id string) (core.AddressInfo
 
 	addrJSON, err := trdredis.HGet(ctx, def.RedisAddressbookIDField, id).Result()
 	if err != nil {
-		if err == redis.Nil {
+		if errors.Is(err, redis.Nil) {
 			return core.AddressInfo{}, ErrUnknownActor
 		}
 		return core.AddressInfo{}, fmt.Errorf("[addressbook] get by id %s hget err: %s", id, err.Error())

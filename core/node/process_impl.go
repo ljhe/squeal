@@ -50,7 +50,7 @@ func (pn *process) System() core.ISystem {
 }
 
 func (pn *process) Init(opts ...core.NodeOption) error {
-
+	// register static node
 	pn.p.Loader.AssignToNode(pn)
 	return nil
 }
